@@ -85,7 +85,7 @@ function obj(){
                 console.log(grammarCorrections);
             }
         }
-        
+
     });
 
     xhr.open("POST", "https://grammarbot.p.rapidapi.com/check");
@@ -101,7 +101,7 @@ function getUserInput(){
         var recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
- //stop on mouse up     
+ //stop on mouse up
     document.onmousedown = function(){
         recognition.onstart = function(){
             console.log("Recording started");
@@ -116,17 +116,8 @@ function getUserInput(){
     }else{
         console.log("Not supported by Browser")
     }
-    
 
-}
 
-/**
- * Return a random element from an array
- * @param {*[]} arr - The array to select an element from
- * @returns {*}
- */
-Array.prototype.random = function (arr) {
-	return arr[Math.floor(Math.random() * arr.length())];
 }
 
 /**
@@ -141,7 +132,7 @@ function randomQuestion(language, difficulty) {
 		 "What is your favorite animal?",
 		 "What is your favorite color?"
 	];
-	return questions.random();
+	return questions[Math.floor(Math.random() * questions.length)];
 }
 
 /**
