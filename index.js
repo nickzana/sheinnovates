@@ -15,6 +15,15 @@ class State {
 }
 
 /**
+ * Return a random element from an array
+ * @param {*[]} arr - The array to select an element from
+ * @returns {*}
+ */
+Array.prototype.random = function (arr) {
+	return arr[Math.floor(Math.random() * arr.length())];
+}
+
+/**
  * Return a question to ask the user
  * @param {string} language - language of the question to return
  * @param {number} difficulty - difficulty of the question between 1 and 10
@@ -27,15 +36,6 @@ function randomQuestion(language, difficulty) {
 		 "What is your favorite color?"
 	];
 	return questions.random();
-}
-
-/**
- * Return a random element from an array
- * @param {*[]} arr - The array to select an element from
- * @returns {*}
- */
-Array.prototype.random = function (arr) {
-	return arr[Math.floor(Math.random() * arr.length())];
 }
 
 /**
