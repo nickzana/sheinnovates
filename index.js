@@ -155,13 +155,84 @@ function getUserInput(){
  * @param {number} difficulty - difficulty of the question between 1 and 10
  * @returns {string}
  */
-function randomQuestion(language, difficulty) {
+/**
+ * Return a question to ask the user
+ * @param {string} language - language of the question to return
+ * @param {number} difficulty - difficulty of the question between 1 and 10
+ * @returns {string}
+ */
+function randomQuestion(language, difficulty, category) {
 	// TODO: Pull a quote from a database
-	var questions = [
-		 "What is your favorite animal?",
-		 "What is your favorite color?"
-	];
-	return questions[Math.floor(Math.random() * questions.length)];
+	const ques = 
+`What is your name?
+Where do you live?
+Where are you from?
+Where were you born?
+What do you do?
+What do you study?
+Describe yourself in three words.
+Tell me about yourself.
+Who is your favourite person in the world and why?
+What do you want to do when you’re older?
+What type of house do you live in?
+How many people are in your family?
+Do you have any brothers or sisters?
+What does your dad do?
+What does your mum do?
+Describe your brother/sister.
+Are you married?
+Do you have any pets?
+Do you want any pets?
+Do you want any children?
+Do you have any children?
+Describe your house.
+Describe your city or town.
+What do you like to do in your free time?
+What sport do you do?
+Do you prefer winter sports or summer sports?
+What if your favourite sport?
+Do you like listening to music?
+Do you like reading books?
+What was the last book you read
+What was the last movie you watched?
+What type of music do you like listening to?
+What type of movies do you like to watch?
+Do you prefer arts or sports?
+Do you like art?
+What do you like to do to relax?
+What do you think of modern art?
+Do you prefer team games or individual games?
+Where is the best place you’ve ever been on holiday?
+Where was the last place you went on holiday?
+Do you prefer beaches or mountains?
+Do you like to travel alone or in a group?
+Do you prefer to eat in the hotel or at local restaurants?
+Do you prefer to use the local currency or pay for everything on card?
+Do you prefer to use a map or an app?
+Do you prefer to plan your holiday or leave everything to chance?
+Do you prefer to stay in a hotel or an air bnb?
+Do you like to learn the language of the country you’re in or use English?`
+	var questions = ques.split('\n');
+	var prev = 0;
+	if(category == 11)
+	{
+		prev = 0;
+	}
+	else if(category == 23)
+	{
+		prev = 11;
+	}
+	else if(category == 38)
+	{
+		prev = 23;
+	}
+	else if(category == 48)
+	{
+		prev ==38;
+	}
+
+	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
+	return ans;
 }
 
 /**
