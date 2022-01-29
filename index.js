@@ -23,6 +23,7 @@ class PageElements {
  */
 class State {
 	_question;
+	recording = false;
 
 	/**
 	 * @param {string} value			- the value to set the question to
@@ -150,6 +151,46 @@ function randomQuestion(language, difficulty) {
 	return questions[Math.floor(Math.random() * questions.length)];
 }
 
+const question = document.getElementById('question')
+function updateQuestion(newQuestion) {
+	question.textContent = newQuestion
+}
+
+const updateQuestionBtn = document.getElementById('change-question-button')
+updateQuestionBtn.addEventListener('click', () => {
+	updateQuestion(questions[Math.floor(Math.random()*questions.length)])
+})
+
+questions = ['question#1', 'question#2', 'question#3']
+
+const transcriptText = document.getElementById('transcript-text')
+function updateTranscriptText(newTranscript) {
+	transcriptText.textContent = newTranscript
+}
+
+const transcriptResult = document.getElementById('transcript-result')
+function updateTranscriptResult(newTranscript) {
+	transcriptResult.textContent = newTranscript
+}
+
+const transcriptContainer = document.getElementById('transcript-container')
+const recordBtn = document.getElementById('record')
+recordBtn.addEventListener('click', () => {
+	if (state.recording == false) {
+		recordBtn.textContent = "Stop Recording"
+		state.recording = true;
+		alert("recording")
+	} else {
+		recordBtn.textContent = "Record"
+		transcriptContainer.style.display = 'block'
+	}
+})
+
+const tryAgainBtn = document.getElementById('tryAgainBtn')
+
+tryAgainBtn.addEventListener('click', () => {
+	transcriptContainer.style.display = 'none'
+})
 /**
  * Runs on launch of the site to do initial setup
  */

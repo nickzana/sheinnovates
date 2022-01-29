@@ -171,6 +171,7 @@ nav a {
     padding: 1em;
     border-radius: 4px;
     color: #deefe2;
+    display: none;
 }
 
 /* Transcript styles */
@@ -178,6 +179,7 @@ nav a {
     background-color: #5cdb95;
     padding: 1em;
     margin-top: 1em;
+    display: none;
 }
 
 .transcript-title {
