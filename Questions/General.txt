@@ -1,0 +1,11 @@
+What is your name?
+Where do you live?
+Where are you from?
+Where were you born?
+What do you do?
+What do you study?
+Describe yourself in three words.
+Tell me about yourself.
+Who is your favourite person in the world and why?
+What do you want to do when you’re older?
+What type of house do you live in?
