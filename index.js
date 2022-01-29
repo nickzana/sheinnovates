@@ -182,7 +182,9 @@ recordBtn.addEventListener('click', () => {
 		alert("recording")
 	} else {
 		recordBtn.textContent = "Record"
+		state.recording = false;
 		transcriptContainer.style.display = 'block'
+		transcriptContainer.scrollIntoView()
 	}
 })
 
