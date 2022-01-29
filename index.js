@@ -1,7 +1,51 @@
 var state;
 
-/** Class representing the state of the program */
+/**
+ * @typedef	 {Object}	State			- Class representing the state of the program
+ * @property {string}	question		- The current question being displayed to the user.
+ * @property {string}	language		- The language the user speaks
+ * @property {number}	difficulty		- The difficulty of question to present to the user
+ */
 class State {
+	_question;
+
+	/**
+	 * @param {string} value			- the value to set the question to
+	 */
+	set question(value) {
+		this._question = value;
+	}
+
+	get question() {
+		return this._question;
+	}
+
+	_language;
+
+	/**
+	 * @param {string} value			- the value to set the language to
+	 */
+	set language(value) {
+		this._language = value;
+	}
+
+	get language() {
+		return this._language;
+	}
+
+	_difficulty;
+
+	/**
+	 * @param {number} value			- the value to set the difficulty to
+	 */
+	set difficulty(value) {
+		this._difficulty = value;
+	}
+
+	get difficulty() {
+		return this._difficulty;
+	}
+
 	/**
 	 * Create a state for the program
 	 * @param {string} language - the language the user speaks
