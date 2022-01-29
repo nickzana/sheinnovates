@@ -20,6 +20,7 @@ class PageElements {
  * @property {string}	question		- The current question being displayed to the user.
  * @property {string}	language		- The language the user speaks
  * @property {number}	difficulty		- The difficulty of question to present to the user
+ * @property {string}	transcriptText	- A variable to store the text transcribed from the user's speech
  */
 class State {
 	_question;
@@ -59,6 +60,19 @@ class State {
 
 	get difficulty() {
 		return this._difficulty;
+	}
+
+	_transcriptText;
+
+	/**
+	 * @param {string} value			- the value to set the transcriptText to
+	 */
+	set transcriptText(value) {
+		this._transcriptText = value;
+	}
+
+	get transcriptText() {
+		return this._transcriptText;
 	}
 
 	/**
