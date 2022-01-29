@@ -15,7 +15,7 @@
                 <ul>
                     <a href="index.html"><li>Home</li></a>
                     <a href="about.html"><li>About</li></a>
-                    <a href="#"><li>Learn More</li></a>
+                    <a href="learn.html"><li>Learn More</li></a>
                 </ul>
             </nav>
         </div>
@@ -25,10 +25,10 @@
             <h1>SheInnovates</h1>
             <p>SheInnovates is a tool to help improve your english speaking skills. 
                 Simply record yourself and SheInnovates will catch any grammatical errors</p>
-            <button id="startBtn" type="button" onClick="document.getElementById('transcript-section').scrollIntoView();">Click to Start</button>
+            <button id="startBtn" type="button" onClick="document.getElementById('app-section').scrollIntoView();">Click to Start</button>
         </div>
 
-        <div id="transcript-section">
+        <div id="app-section">
             <span id="cta">Here's a question to help you get started: </span>
             <div id="question-container">
                 <span id="question-title">Question:</span>
@@ -40,17 +40,30 @@
                     <span>Record Your Audio</span>
                 </div>
                 <ul>
-                    <li>Record yourself by clicking and holding the record button</li>
+                    <li>Record yourself by clicking and holding the 'Record' button</li>
                     <li>When you are done recording, release the record button</li>
+                    <li>To submit the recording, hit the 'Submit' button</li>
                 </ul>
             </div>
-            <button id="record" type="button">Record</button>
-            <button id="submit" type="submit">Submit</button>
-            <div id="results-container">
-                <span>Here's what we heard</span>
-                <span>I like dog</span>
+            <div id="recording-controls">
+                <button id="record" type="button">Record</button>
+                <button id="submit" type="submit">Submit</button>
+            </div>
+            
+            <div id="transcript-container">
+                <span class="transcript-title">Here's what we heard: </span><br>
+                <span id="transcript-text">I like dog</span><br>
+                <span class="transcript-title">Here's what we found: </span><br>
+                <span id="transcript-result"><span>
                 <hr>
-                <span>Grammatical error: should've been I like dogs</span>
+                <ul>
+                    <li>If you want to try recording again, click the 'Try Again' button</li>
+                    <li>Otherwise, press the 'Review' button to review your grammar!</li>
+                </ul>
+                <div id="transcript-controls">
+                    <button id="tryAgainBtn" type="button">Try Again</button>
+                    <button id="reviewBtn" type="button">Review</button>
+                </div>
             </div>
         </div>
 
