@@ -58,6 +58,68 @@ class State {
 	}
 }
 
+function changeString(userInput){
+    userInput = userInput.split(' ').join('%20');
+    var formatUserInput = "text=" + userInput + "&language=en-US";
+    console.log(formatUserInput)
+    return formatUserInput;
+}
+
+
+function obj(){
+    const data = changeString("I goes too the stores");
+    const grammarCorrections = [];
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var json = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            if(json.matches.length == 0){
+                console.log("Correct")
+            }else{
+                for(const match of json.matches){
+                    grammarCorrections.push(match.message);
+                }
+                console.log(grammarCorrections);
+            }
+        }
+        
+    });
+
+    xhr.open("POST", "https://grammarbot.p.rapidapi.com/check");
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("x-rapidapi-host", "grammarbot.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "f8a5476c0dmsh0944856f713f44ep14a1dfjsn96d9d75c6d1b");
+
+    xhr.send(data);
+}
+function getUserInput(){
+    var transcript = "";
+    if("webkitSpeechRecognition" in window){
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+ //stop on mouse up     
+    document.onmousedown = function(){
+        recognition.onstart = function(){
+            console.log("Recording started");
+        };
+    }
+    document.onmouseup = function(){
+        recognition.onres
+    }
+
+
+
+    }else{
+        console.log("Not supported by Browser")
+    }
+    
+
+}
+
 /**
  * Return a random element from an array
  * @param {*[]} arr - The array to select an element from
