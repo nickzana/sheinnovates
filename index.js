@@ -20,6 +20,7 @@ class PageElements {
  * @property {string}	question		- The current question being displayed to the user.
  * @property {string}	language		- The language the user speaks
  * @property {number}	difficulty		- The difficulty of question to present to the user
+ * @property {_errors} grammarCorrections - Array that stores the grammar errors
  */
 class State {
 	_question;
@@ -28,6 +29,9 @@ class State {
 	 * @param {string} value			- the value to set the question to
 	 */
 	set question(value) {
+		if(true)//boolean if they want it to talk
+			speakTheQuestion(value);
+
 		this._question = value;
 	}
 
@@ -61,6 +65,7 @@ class State {
 		return this._difficulty;
 	}
 
+
 	/**
 	 * Create a state for the program
 	 * @param {string} language - the language the user speaks
@@ -80,6 +85,13 @@ function formatString(userInput){
     return formatUserInput;
 }
 
+function tryAgain(){
+	grammarCorrections = []; 
+	//speechtotext
+	//formatString(speachtoText)
+	//grammarcorretipn() returns errors
+	//state.errors=
+}
 
 function grammarCorrections(){
     const data = changeString("I goes too the stores");
@@ -133,7 +145,13 @@ function getUserInput(){
         console.log("Not supported by Browser")
     }
 
+}
 
+function speakTheQuestion(question){
+	var synthesis = window.speechSynthesis;
+	var utterance = new SpeechSynthesisUtterance(userinput);
+
+	synthesis.speak(utterance);
 }
 
 /**
@@ -148,9 +166,12 @@ function randomQuestion(language, difficulty) {
 		 "What is your favorite animal?",
 		 "What is your favorite color?"
 	];
-	return questions[Math.floor(Math.random() * questions.length)];
-}
+	var randQuestion = questions[Math.floor(Math.random() * questions.length)];
+	// if(true)
+	// 	speakTheQuestion(randQuestion);
 
+	return randQuestion;
+}
 /**
  * Runs on launch of the site to do initial setup
  */
