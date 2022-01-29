@@ -1,4 +1,19 @@
 var state;
+var elements;
+
+/**
+ * @typedef	 {Object}	PageElements	- Class containing references to mutatable elements in the DOM
+ */
+class PageElements {
+
+	questionText = document.getElementById("question");
+	recordButton = document.getElementById("record");
+	transcriptText = document.getElementById("transcript-text");
+	nextQuestionButton = document.getElementById("change-question-button");
+	errors = document.getElementById("transcript-result");
+
+	constructor() {}
+}
 
 /**
  * @typedef	 {Object}	State			- Class representing the state of the program
@@ -141,6 +156,7 @@ function randomQuestion(language, difficulty) {
 function onStart() {
 	// TODO: Get default language from browser
 	state = new State('en-US', 5);
+	elements = new PageElements();
 }
 
 /** Execute initialization code */

@@ -106,7 +106,7 @@ nav a {
     display: flex;
     justify-content: center;
     font-size: 30px;
-    
+
 }
 
 #question-container {
@@ -127,7 +127,7 @@ nav a {
     font-size: 24px;
 }
 
-#changeQuestionBtn {
+#change-question-button {
     border: none;
     background-color: #5cdb95;
     padding: 0.5em;
