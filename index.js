@@ -73,7 +73,7 @@ class State {
 	}
 }
 
-function changeString(userInput){
+function formatString(userInput){
     userInput = userInput.split(' ').join('%20');
     var formatUserInput = "text=" + userInput + "&language=en-US";
     console.log(formatUserInput)
@@ -81,7 +81,7 @@ function changeString(userInput){
 }
 
 
-function obj(){
+function grammarCorrections(){
     const data = changeString("I goes too the stores");
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
@@ -98,7 +98,8 @@ function obj(){
                     grammarCorrections.push(match.message);
                 }
                 console.log(grammarCorrections);
-            }
+				return grammarCorrections;
+			}
         }
 
     });
