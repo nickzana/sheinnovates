@@ -11,11 +11,11 @@
     <header>
         <div id="nav-container">
             <nav>
-                <span>SheInnovates</span>
+                <a href="index.html"><span>SheInnovates</span></a>
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Learn More</li>
+                    <a href="index.html"><li>Home</li></a>
+                    <a href="about.html"><li>About</li></a>
+                    <a href="#"><li>Learn More</li></a>
                 </ul>
             </nav>
         </div>
@@ -25,21 +25,27 @@
             <h1>SheInnovates</h1>
             <p>SheInnovates is a tool to help improve your english speaking skills. 
                 Simply record yourself and SheInnovates will catch any grammatical errors</p>
-            <button id="changeQuestionBtn" type="button">Click to Start</button>
+            <button id="startBtn" type="button" onClick="document.getElementById('transcript-section').scrollIntoView();">Click to Start</button>
         </div>
+
         <div id="transcript-section">
+            <span id="cta">Here's a question to help you get started: </span>
             <div id="question-container">
-                <span>Question:</span>
-                <span>What's your favorite animal?</span>
-                <button type="button">Change Question</button>
+                <span id="question-title">Question:</span>
+                <span id="question">What's your favorite animal?</span>
+                <button id="changeQuestionBtn" type="button">Change Question</button>
             </div>
             <div id="recording-container">
-                <span>Record Your Audio</span>
+                <div id="record-prompt">
+                    <span>Record Your Audio</span>
+                </div>
                 <ul>
                     <li>Record yourself by clicking and holding the record button</li>
                     <li>When you are done recording, release the record button</li>
                 </ul>
             </div>
+            <button id="record" type="button">Record</button>
+            <button id="submit" type="submit">Submit</button>
             <div id="results-container">
                 <span>Here's what we heard</span>
                 <span>I like dog</span>

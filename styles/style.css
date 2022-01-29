@@ -1,17 +1,18 @@
-/* base styles */
+/* Base styles */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: lightblue;
+    background-color: #deefe2;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
 }
 
-/* nav styles */
-header {   
-}
-
+/* Nav styles */
 #nav-container {
-    background-color: lightcyan;
+    background-color: #5cdb95;
 }
 
 nav {
@@ -19,6 +20,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 0.5em 2em 0.5em 2em;
+    color: #f0f8ff;
 }
 
 nav span {
@@ -34,7 +36,12 @@ nav ul {
 
 }
 
-/* welcome section styles */
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Welcome section styles */
 #welcome-section {
     text-align: center;
     max-width: 45%;
@@ -50,14 +57,17 @@ nav ul {
     line-height: 1.6;
 }
 
-#changeQuestionBtn {
+#startBtn {
     border: none;
-    background-color: skyblue;
-    padding: 2em;
-    border-radius: 16px;
+    background-color: #5cdb95;
+    color: #deefe2;
+    padding: 1.5em;
+    border-radius: 4px;
+    margin-bottom: 10em;
+    font-size: 24px;
 }
 
-/* transcript section styles */
+/* Transcript section styles */
 #transcript-section {
     text-align: center;
     max-width: 45%;
@@ -65,11 +75,78 @@ nav ul {
     margin-right: auto;
 }
 
-#question-container {
-
+/* Question styles */
+#cta {
+    font-size: 30px;
 }
 
 #question-container {
-    background-color: cy;
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    box-shadow: 0px 0px 15px 0px #333;
+    padding: 2em 1em 2em 1em;
+}
+
+#question-title {
+    font-size: 18px;
+}
+
+#question {
+    font-size: 24px;
+}
+
+#changeQuestionBtn {
     border: none;
+    background-color: #5cdb95;
+    padding: 0.5em;
+    border-radius: 4px;
+}
+
+/* Recording styles */
+#recording-container {
+    margin-top: 1em;
+    background-color: #deefe2;
+    padding-bottom: 1em;
+}
+
+#record-prompt {
+    background-color:#5cdb95;
+    padding: 0.5em 0em 0.5em 0em;
+    font-size: 24px;
+}
+
+#record {
+    border: none;
+    background-color: red;
+    padding: 1em;
+    border-radius: 8px;
+    color: white;
+}
+
+#submit {
+    border: none;
+    background-color: gray;
+    padding: 1em;
+    border-radius: 8px;
+    color: #deefe2;
+}
+
+/* About Styles */
+#about {
+    max-width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    color: #5cdb95;
+}
+
+.about-section p {
+    line-height: 1.3;
+    color: #333;
 }
