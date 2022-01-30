@@ -9,7 +9,7 @@ function randomQuestion(category) {
 `How many people are in your family?
 Do you have any brothers or sisters?
 What does your dad do?
-What does your mum do?
+What is you mother's occupation?
 Describe your brother/sister.
 Are you married?
 Do you have any pets?
@@ -25,7 +25,7 @@ Do you think you’re a good cook?
 what was the last meal you cooked?
 Do you think you’re a healthy person?
 Are you a vegetarian?
-Do you drink alcohol?
+Do you drink Coke or pepsi and why?
 Do you prefer tea or coffee?
 Which country has the best food?
 Do you prefer pasta or rice?
@@ -69,19 +69,19 @@ Do you prefer to stay in a hotel or an air bnb?
 Do you like to learn the language of the country you’re in or use English?`
 	var questions = ques.split('\n');
 	var prev = 0;
-	if(category == 12)
+	if(category == 12)          // 12 family questions
 	{
 		prev = 1;
 	}
-	else if(category == 25)
+	else if(category == 25)      // 13 food questions  12 + 13 = 25
 	{
 		prev = 13;
 	}
-	else if(category == 36)
+	else if(category == 36)      // 11 general questions  25 + 11 = 36
 	{
 		prev = 26;
 	}
-	else if(category == 51)
+	else if(category == 51)		// 15 Hobbies questions
 	{
 		prev =37;
 	}
@@ -89,7 +89,7 @@ Do you like to learn the language of the country you’re in or use English?`
 	{
 		prev = 52;
 	}
-	var number = Math.floor(Math.random() * (category - prev)) + prev;
+	var number = Math.floor(Math.random() * (category - prev)) + prev;    // generate random number according to category
 
 	var ans =  questions[number];
 	return ans;
