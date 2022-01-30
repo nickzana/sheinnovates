@@ -17,13 +17,13 @@ class PageElements {
 
 	constructor() {
 		this.nextQuestionButton.addEventListener('click', () => {
-			updateQuestion(randomQuestion(this.periodDropdown.value))
+			state.question = randomQuestion(this.periodDropdown.value);
 		})
 
 		this.categories.addEventListener('click', () => {
 			if (this.periodDropdown.value != -1) {
 				this.questionContainer.style.display = 'flex'
-				updateQuestion(randomQuestion(this.periodDropdown.value))
+				state.question = randomQuestion(this.periodDropdown.value);
 			}
 			if (this.periodDropdown.value == -1) this.questionContainer.style.display = 'none'
 		})
@@ -44,5 +44,31 @@ class PageElements {
 		this.tryAgainButton.addEventListener('click', () => {
 			this.transcriptContainer.style.display = 'none'
 		})
+	}
+
+	updateTranscriptResult(newTranscript) {
+		if (newTranscript != undefined) {
+			while (elements.corrections.firstChild) {
+				elements.corrections.removeChild(elements.corrections.firstChild);
+			}
+			for (let i = 0; i < newTranscript.length; i++) {
+				let listItem = document.createElement('li')
+				listItem.textContent = newTranscript[i]
+				elements.corrections.appendChild(listItem)
+			}
+			if (newTranscript.length == 0) {
+				let listItem = document.createElement('li')
+				listItem.textContent = "Correct! :)"
+				elements.transcriptResult.appendChild(listItem)
+			}
+		}
+	}
+
+	updateGui(state) {
+		this.questionText.textContent = state.question;
+
+		this.transcriptText.textContent = state.transcriptText;
+
+		this.updateTranscriptResult(state.corrections);
 	}
 }
