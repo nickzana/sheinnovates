@@ -16,17 +16,18 @@ class PageElements {
 	recordingContainer = document.getElementById("recording-container");
 
 	constructor() {
-		this.nextQuestionButton.addEventListener('click', () => {
+		this.nextQuestionButton.onclick = function() {
 			state.question = randomQuestion(state.category);
-		})
+		};
 
 		this.categories.addEventListener('change', (e) => {
 			state.category = e.target.value;
 		})
 
-		this.textToSpeech.addEventListener('click', () =>{
-			speakTheQuestion(this.questionText.textContent);
-		})
+		this.textToSpeech.onclick = function() {
+			console.log("Pressed texttospeech");
+			speakTheQuestion(state.question);
+		};
 
 		this.recordButton.onclick = function() {
 			console.log("Pressed record");
