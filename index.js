@@ -118,8 +118,8 @@ class State {
 
 		this.transcriber  = new Transcriber(
 			// receiver: Called when new text is sent from the Transcriber
-			function(transcript) { 
-				state.transcriptText = transcript 
+			function(transcript) {
+				state.transcriptText = transcript
 			},
 			// onEnd: Called when transcription has completed, either automatically or manually
 			function(_) {
@@ -147,7 +147,7 @@ var SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecogn
  * See https://github.com/mdn/web-speech-api/
  */
 class Transcriber {
-	
+
 	_recognition;
 
 	/**
@@ -177,7 +177,7 @@ class Transcriber {
 		this._recognition.continuous = continuous;
 		this._recognition.lang = lang;
 		this._recognition.interimResults = interimResults;
-		
+
 		this._recognition.onresult = function(event) {
 			const transcript = event.results[0][0].transcript;
 			receiver(transcript);
@@ -249,29 +249,6 @@ function grammarCorrections(){
     xhr.setRequestHeader("x-rapidapi-key", "f8a5476c0dmsh0944856f713f44ep14a1dfjsn96d9d75c6d1b");
 
     xhr.send(data);
-}
-function getUserInput(){
-    var transcript = "";
-    if("webkitSpeechRecognition" in window){
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
- //stop on mouse up
-    document.onmousedown = function(){
-        recognition.onstart = function(){
-            console.log("Recording started");
-        };
-    }
-    document.onmouseup = function(){
-        recognition.onres
-    }
-
-
-
-    }else{
-        console.log("Not supported by Browser")
-    }
-
 }
 
 function speakTheQuestion(question){
@@ -378,7 +355,7 @@ Do you like to learn the language of the country you’re in or use English?`
 		prev = 52;
 	}
 	var number = Math.floor(Math.random() * (category - prev)) + prev;
-	
+
 	var ans =  questions[number];
 	return ans;
 }
