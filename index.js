@@ -414,16 +414,14 @@ recordBtn.addEventListener('click', () => {
 	} else {
 		state.transcriber.stop()
 		recordBtn.textContent = "Record"
-		state.recording = false;
+		stopT()
 		transcriptContainer.style.display = 'block'
 		transcriptContainer.scrollIntoView()
+		checkTranscriptT()
 	}
 })
-
 
 const tryAgainBtn = document.getElementById('tryAgainBtn')
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
-	clearTranscriptText()
-	clearTranscriptResult()
 })
