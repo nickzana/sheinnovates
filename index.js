@@ -19,10 +19,6 @@ class State {
 	 */
 	set question(value) {
 		//boolean if they want it to talk
-		if(true) {
-			speakTheQuestion(value);
-		}
-
 		this._question = value;
 		this.updateGui();
 	}
@@ -87,6 +83,14 @@ class State {
 		}
 
 		this.updateGui();
+	}
+	_textToSpeech;
+	set textToSpeech(value){
+		this._textToSpeech = value;
+	}
+
+	get textToSpeech(){
+		return this._textToSpeech;
 	}
 
 	get transcriptText() {
