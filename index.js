@@ -99,7 +99,9 @@ class State {
 	 */
 	checkTranscript(transcript) {
 		console.log(transcript);
-		grammarCorrections(transcript);
+		updateTranscriptText(transcript);
+		var corrections = grammarCorrections(transcript);
+		updateTranscriptResult(corrections);
 		// TODO: Send transcription text to grammar checker and update errors array
 	}
 
@@ -363,6 +365,18 @@ Do you like to learn the language of the country you’re in or use English?`
 	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
 }
 
+/**
+ * Runs on launch of the site to do initial setup
+ */
+function onStart() {
+	// TODO: Get default language from browser
+	state = new State('en-US', 5);
+	elements = new PageElements();
+}
+
+/** Execute initialization code */
+onStart();
+
 const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
 	question.textContent = newQuestion
@@ -389,31 +403,34 @@ const transcriptContainer = document.getElementById('transcript-container')
 const recordBtn = document.getElementById('record')
 recordBtn.addEventListener('click', () => {
 	if (state.recording == false) {
+		startT()
 		recordBtn.textContent = "Stop Recording"
 		state.recording = true;
-		alert("recording")
+		
 	} else {
+		state.transcriber.stop()
 		recordBtn.textContent = "Record"
-		state.recording = false;
+		stopT()
 		transcriptContainer.style.display = 'block'
 		transcriptContainer.scrollIntoView()
+		checkTranscriptT()
 	}
 })
+
+function startT() {
+	state.transcriber.start()
+}
+
+function stopT() {
+	state.transcriber.stop()
+}
+
+function checkTranscriptT() {
+	state.checkTranscript()
+}
 
 const tryAgainBtn = document.getElementById('tryAgainBtn')
 
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
 })
-
-/**
- * Runs on launch of the site to do initial setup
- */
-function onStart() {
-	// TODO: Get default language from browser
-	state = new State('en-US', 5);
-	elements = new PageElements();
-}
-
-/** Execute initialization code */
-onStart();
