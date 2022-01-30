@@ -3,20 +3,6 @@ var elements;
 var grammar;
 
 /**
- * @typedef	 {Object}	PageElements	- Class containing references to mutatable elements in the DOM
- */
-class PageElements {
-
-	questionText = document.getElementById("question");
-	recordButton = document.getElementById("record");
-	transcriptText = document.getElementById("transcript-text");
-	nextQuestionButton = document.getElementById("change-question-button");
-	errors = document.getElementById("transcript-result");
-
-	constructor() {}
-}
-
-/**
  * @typedef	 {Object}	State			- Class representing the state of the program
  * @property {string}	question		- The current question being displayed to the user.
  * @property {string}	language		- The language the user speaks
@@ -172,47 +158,27 @@ function speakTheQuestion(question){
 	synthesis.speak(utterance);
 }
 
-const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
-	question.textContent = newQuestion
+	elements.questionText.textContent = newQuestion
 }
 
-const updateQuestionBtn = document.getElementById('change-question-button')
-const x = document.getElementById("period_dropdown")
-const questionContainer = document.getElementById('question-container')
-let categorySelected = false;
-updateQuestionBtn.addEventListener('click', () => {
-	updateQuestion(randomQuestion(x.value))
-})
-
-const categories = document.getElementById('categories')
-categories.addEventListener('click', () => {
-	if (x.value != -1) {
-		questionContainer.style.display = 'flex'
-		updateQuestion(randomQuestion(x.value))
-	}
-	if (x.value == -1) questionContainer.style.display = 'none'
-})
-
-const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
-	transcriptText.textContent = newTranscript
+	elements.transcriptText.textContent = newTranscript
 }
 function clearTranscriptText() {
-	transcriptText.textContent = ""
+	elements.transcriptText.textContent = ""
 }
 
-const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
 	if (newTranscript != undefined) {
-		while (transcriptResult.firstChild) {
-			transcriptResult.removeChild(transcriptResult.firstChild);
+		while (elements.corrections.firstChild) {
+			elements.corrections.removeChild(elements.corrections.firstChild);
 		}
 		for (let i = 0; i < newTranscript.length; i++) {
 			let listItem = document.createElement('li')
 			listItem.textContent = newTranscript[i]
 			console.log(newTranscript[i])
-			transcriptResult.appendChild(listItem)
+			elements.corrections.appendChild(listItem)
 		}
 		if (newTranscript.length == 0) {
 			let listItem = document.createElement('li')
@@ -222,28 +188,8 @@ function updateTranscriptResult(newTranscript) {
 	}
 }
 function clearTranscriptResult() {
-	transcriptResult.textContent = ""
+	elements.corrections.textContent = ""
 }
-
-const transcriptContainer = document.getElementById('transcript-container')
-const recordBtn = document.getElementById('record')
-recordBtn.addEventListener('click', () => {
-	if (state.recording == false) {
-		state.transcriber.start();
-		recordBtn.textContent = "Stop Recording"
-		state.recording = true;
-	} else {
-		recordBtn.textContent = "Record"
-		state.recording = false;
-		transcriptContainer.style.display = 'block'
-		transcriptContainer.scrollIntoView()
-	}
-})
-
-const tryAgainBtn = document.getElementById('tryAgainBtn')
-tryAgainBtn.addEventListener('click', () => {
-	transcriptContainer.style.display = 'none'
-})
 
 /**
  * Runs on launch of the site to do initial setup
