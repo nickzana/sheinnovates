@@ -322,7 +322,17 @@ function clearTranscriptText() {
 
 const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
-	transcriptResult.textContent = newTranscript
+	if (newTranscript != undefined) {
+		while (transcriptResult.firstChild) {
+			transcriptResult.removeChild(transcriptResult.firstChild);
+		}
+		for (let i = 0; i < newTranscript.length; i++) {
+			let listItem = document.createElement('li')
+			listItem.textContent = newTranscript[i]
+			console.log(newTranscript[i])
+			transcriptResult.appendChild(listItem)
+		}
+	}
 }
 function clearTranscriptResult() {
 	transcriptResult.textContent = ""
