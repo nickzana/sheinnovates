@@ -63,18 +63,20 @@ class PageElements {
 			this.recordButton.scrollIntoView();
 		}
 
+		if (state.isTranscribing || state.corrections == null) {
+			this.transcriptContainer.style.display = "none";
+		}
+
+
 		if (state.isTranscribing) {
 			this.recordingContainer.style.display = 'none';
 			this.recordButton.textContent = "Stop Recording";
-			this.transcriptContainer.style.display = "none";
 		} else {
 			this.recordButton.textContent = "Record";
 
 			if (state.corrections != null) {
 				this.transcriptContainer.style.display = "block";
 				this.transcriptContainer.scrollIntoView();
-			} else {
-				this.transcriptContainer.style.display = "none";
 			}
 		}
 	}
