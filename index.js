@@ -22,6 +22,8 @@ class PageElements {
  * @property {number}	difficulty		- The difficulty of question to present to the user
  * @property {string}	transcriptText	- A variable to store the text transcribed from the user's speech
  * @property {Object[]} corrections		- Array that stores the grammar errors
+ * @property {Transcriber} transcriber	- Voice transcription provider
+ * @property {boolean}  isTranscribing  - Whether the user is currently speaking
  */
 class State {
 	recording = false;
@@ -80,6 +82,26 @@ class State {
 		return this._transcriptText;
 	}
 
+	_isTranscribing = false;
+
+	set isTranscribing(value) {
+		this._isTranscribing = value;
+	}
+
+	get isTranscribing() {
+		return this._isTranscribing;
+	}
+
+	transcriber;
+
+	/**
+	 * Sends transcript to grammar checker and updates errors
+	 */
+	checkTranscript(transcript) {
+		console.log(transcript);
+		// TODO: Send transcription text to grammar checker and update errors array
+	}
+
 	/**
 	 * Create a state for the program
 	 * @param {string} language - the language the user speaks
@@ -89,6 +111,92 @@ class State {
 		this.language = language;
 		this.difficulty = difficulty;
 		this.question = randomQuestion(language, difficulty);
+		this.transcriptionText = "";
+
+		this.transcriber  = new Transcriber(
+			// receiver: Called when new text is sent from the Transcriber
+			function(transcript) { this.transcriptionText += transcript },
+			// onEnd: Called when transcription has completed, either automatically or manually
+			function(_) {
+				this.isTranscribing = false;
+				this.checkTranscript(this.transcriptionText);
+			},
+			// whether transcription is continuous
+			true, // TODO: This could be dynamically decided based on if the user is holding the button or just pressed it
+			// The language, only English for now
+			'en-US',
+			// interimResults, allows for incremental handling of transcript
+			true
+		);
+	}
+}
+
+/**
+ * @typedef Transcriber
+ *
+ * Transcriber code adapted from MDN Web Speech API Documentation Example Code
+ * See https://github.com/mdn/web-speech-api/
+ */
+class Transcriber {
+
+	_recognition;
+
+	/**
+	 * Called when the transcriber provides a string transcribed from the user's speech
+	 * @callback Transcriber~receiver
+	 * @param {string} transcript
+	 */
+
+	/**
+	 * @param {Transcriber~receiver} receiver		- Callback to receive transcription
+	 * @param {Transcriber~onEnd}	 onEnd			- Callback to perform at end of transcription
+	 * @param {boolean}				 continuous		- Whether recognizer continues listening automatically after first sentence
+	 * @param {string}				 lang,			- The language to detect and transcribe
+	 * @param {boolean}				 intermResults,	- Whether to send results after each word spoken, or only at the end
+	 */
+	constructor(receiver, onEnd, continuous, lang, interimResults) {
+		// Protect against unsuported browsers
+		if(window.speechRecognition == undefined) {
+			return null;
+		}
+
+		// Protect against browsers that support the API but have not been verified to work
+		this._recognition = SpeechRecognition || webkitSpeechRecognition;
+		if (this._recognition == null) {
+			return null;
+		}
+
+		this._recognition.continuous = continuous;
+		this._recognition.lang = lang;
+		this._recognition.interimResults = interimResults;
+
+		this._recognition.addEventListener('result', event => {
+			for (var i = 0; i < event.results.length; i++) {
+				// Gets the best match from the result
+				const transcript = event.results[i][0].transcript;
+				receiver(transcript);
+			}
+		});
+
+		this._recognition.onEnd = onEnd;
+	}
+
+	start() {
+		if (this._recognition != null) {
+			this._recognition.start();
+		}
+	}
+
+	stop() {
+		if (this._recognition != null) {
+			this._recognition.stop();
+		}
+	}
+
+	cancel() {
+		if (this._recognition != null) {
+			this._recognition.cancel();
+		}
 	}
 }
 
