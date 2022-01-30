@@ -30,6 +30,7 @@ class PageElements {
 		})
 
 		this.textToSpeech.addEventListener('click', () =>{
+			
 			state.textToSpeech = speakTheQuestion(this.questionText.textContent);
 		})
 
