@@ -163,8 +163,7 @@ function getUserInput(){
 
 function speakTheQuestion(question){
 	var synthesis = window.speechSynthesis;
-	var utterance = new SpeechSynthesisUtterance(userinput);
-
+	var utterance = new SpeechSynthesisUtterance(question);
 	synthesis.speak(utterance);
 }
 
@@ -181,7 +180,7 @@ function speakTheQuestion(question){
  * @returns {string}
  */
 function randomQuestion(language, difficulty, category) {
-	const ques = 
+	const ques =
 `What is your name?
 Where do you live?
 Where are you from?
