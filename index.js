@@ -98,7 +98,10 @@ class State {
 	 * Sends transcript to grammar checker and updates errors
 	 */
 	checkTranscript(transcript) {
-		console.log(transcript);
+		console.log(transcript)
+		updateTranscriptText(transcript)
+		var corrections = grammarCorrections(transcript)
+		updateTranscriptResult(corrections)
 		// TODO: Send transcription text to grammar checker and update errors array
 	}
 
@@ -111,25 +114,31 @@ class State {
 		this.language = language;
 		this.difficulty = difficulty;
 		this.question = randomQuestion(language, difficulty);
-		this.transcriptionText = "";
+		this.transcriptText = "";
 
 		this.transcriber  = new Transcriber(
 			// receiver: Called when new text is sent from the Transcriber
-			function(transcript) { this.transcriptionText += transcript },
+			function(transcript) { 
+				state.transcriptText = transcript 
+			},
 			// onEnd: Called when transcription has completed, either automatically or manually
 			function(_) {
-				this.isTranscribing = false;
-				this.checkTranscript(this.transcriptionText);
+				state.isTranscribing = false;
+				state.checkTranscript(state.transcriptText);
 			},
 			// whether transcription is continuous
 			true, // TODO: This could be dynamically decided based on if the user is holding the button or just pressed it
 			// The language, only English for now
 			'en-US',
 			// interimResults, allows for incremental handling of transcript
-			true
+			false
 		);
 	}
 }
+
+var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+var SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
+var SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 /**
  * @typedef Transcriber
@@ -138,7 +147,7 @@ class State {
  * See https://github.com/mdn/web-speech-api/
  */
 class Transcriber {
-
+	
 	_recognition;
 
 	/**
@@ -156,35 +165,32 @@ class Transcriber {
 	 */
 	constructor(receiver, onEnd, continuous, lang, interimResults) {
 		// Protect against unsuported browsers
-		if(window.speechRecognition == undefined) {
-			return null;
-		}
+		// if(window.speechRecognition == undefined) {
+		// 	return null;
+		// }
 
 		// Protect against browsers that support the API but have not been verified to work
-		this._recognition = SpeechRecognition || webkitSpeechRecognition;
+		this._recognition = new SpeechRecognition() || new webkitSpeechRecognition();
 		if (this._recognition == null) {
 			return null;
 		}
-
 		this._recognition.continuous = continuous;
 		this._recognition.lang = lang;
 		this._recognition.interimResults = interimResults;
+		
+		this._recognition.onresult = function(event) {
+			const transcript = event.results[0][0].transcript;
+			receiver(transcript);
+		};
 
-		this._recognition.addEventListener('result', event => {
-			for (var i = 0; i < event.results.length; i++) {
-				// Gets the best match from the result
-				const transcript = event.results[i][0].transcript;
-				receiver(transcript);
-			}
-		});
-
-		this._recognition.onEnd = onEnd;
+		this._recognition.onend = onEnd;
 	}
 
 	start() {
 		if (this._recognition != null) {
 			this._recognition.start();
 		}
+
 	}
 
 	stop() {
@@ -203,7 +209,6 @@ class Transcriber {
 function formatString(userInput){
     userInput = userInput.split(' ').join('%20');
     var formatUserInput = "text=" + userInput + "&language=en-US";
-    console.log(formatUserInput)
     return formatUserInput;
 }
 
@@ -215,8 +220,8 @@ function tryAgain(){
 	//state.errors=
 }
 
-function grammarCorrections(){
-    const data = changeString("I goes too the stores");
+function grammarCorrections(userInput){
+    const data = formatString(userInput);
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -224,7 +229,7 @@ function grammarCorrections(){
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             var json = JSON.parse(this.responseText);
-            console.log(this.responseText);
+            //console.log(this.responseText);
             if(json.matches.length == 0){
                 console.log("Correct")
             }else{
@@ -359,6 +364,18 @@ Do you like to learn the language of the country you’re in or use English?`
 	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
 }
 
+/**
+ * Runs on launch of the site to do initial setup
+ */
+function onStart() {
+	// TODO: Get default language from browser
+	state = new State('en-US', 5);
+	elements = new PageElements();
+}
+
+/** Execute initialization code */
+onStart();
+
 const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
 	question.textContent = newQuestion
@@ -391,10 +408,11 @@ const transcriptContainer = document.getElementById('transcript-container')
 const recordBtn = document.getElementById('record')
 recordBtn.addEventListener('click', () => {
 	if (state.recording == false) {
+		state.transcriber.start();
 		recordBtn.textContent = "Stop Recording"
 		state.recording = true;
-		alert("recording")
 	} else {
+		state.transcriber.stop()
 		recordBtn.textContent = "Record"
 		state.recording = false;
 		transcriptContainer.style.display = 'block'
@@ -409,15 +427,3 @@ tryAgainBtn.addEventListener('click', () => {
 	clearTranscriptText()
 	clearTranscriptResult()
 })
-
-/**
- * Runs on launch of the site to do initial setup
- */
-function onStart() {
-	// TODO: Get default language from browser
-	state = new State('en-US', 5);
-	elements = new PageElements();
-}
-
-/** Execute initialization code */
-onStart();
