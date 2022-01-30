@@ -99,6 +99,7 @@ class State {
 	 */
 	checkTranscript(transcript) {
 		console.log(transcript);
+		grammarCorrections(transcript);
 		// TODO: Send transcription text to grammar checker and update errors array
 	}
 
@@ -218,8 +219,8 @@ function tryAgain(){
 	//state.errors=
 }
 
-function grammarCorrections(){
-    const data = changeString("I goes too the stores");
+function grammarCorrections(userInput){
+    const data = formatString(userInput);
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -227,7 +228,7 @@ function grammarCorrections(){
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             var json = JSON.parse(this.responseText);
-            console.log(this.responseText);
+            //console.log(this.responseText);
             if(json.matches.length == 0){
                 console.log("Correct")
             }else{
