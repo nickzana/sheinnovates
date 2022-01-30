@@ -4,7 +4,6 @@
  * Client for the GrammarBot API.
  */
 class GrammarBotClient {
-	_apiKey = "f8a5476c0dmsh0944856f713f44ep14a1dfjsn96d9d75c6d1b";
 
 	ROOT_URL = "https://grammarbot.p.rapidapi.com/check";
 
@@ -25,7 +24,7 @@ class GrammarBotClient {
 		xhr.open("POST", url);
 		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		xhr.setRequestHeader("x-rapidapi-host", "grammarbot.p.rapidapi.com");
-		xhr.setRequestHeader("x-rapidapi-key", this._apiKey);
+		xhr.setRequestHeader("x-rapidapi-key", API_KEY);
 
 		return xhr;
 	}
