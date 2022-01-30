@@ -286,7 +286,7 @@ function clearTranscriptText() {
 
 const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
-	transcriptResult.textContent = newTranscript
+	transcriptResult.textContent = newTranscript.toString()
 }
 function clearTranscriptResult() {
 	transcriptResult.textContent = ""
