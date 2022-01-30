@@ -270,11 +270,21 @@ function updateQuestion(newQuestion) {
 }
 
 const updateQuestionBtn = document.getElementById('change-question-button')
+const x = document.getElementById("period_dropdown")
+const questionContainer = document.getElementById('question-container')
+let categorySelected = false;
 updateQuestionBtn.addEventListener('click', () => {
-	var x = document.getElementById("period_dropdown").value;
-	updateQuestion(randomQuestion(x))
+	updateQuestion(randomQuestion(x.value))
 })
 
+const categories = document.getElementById('categories')
+categories.addEventListener('click', () => {
+	if (x.value != -1) {
+		questionContainer.style.display = 'flex'
+		updateQuestion(randomQuestion(x.value))
+	}
+	if (x.value == -1) questionContainer.style.display = 'none'
+})
 
 const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
