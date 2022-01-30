@@ -1,5 +1,6 @@
 var state;
 var elements;
+var grammar;
 
 /**
  * @typedef	 {Object}	PageElements	- Class containing references to mutatable elements in the DOM
@@ -76,6 +77,11 @@ class State {
 	 */
 	set transcriptText(value) {
 		this._transcriptText = value;
+		if (!this.isTranscribing) {
+			grammar.check(this._transcriptText, this.language, function(corrections) {
+				this.corrections = corrections;
+			});
+		}
 	}
 
 	get transcriptText() {
@@ -136,49 +142,12 @@ class State {
 	}
 }
 
-function formatString(userInput){
-    userInput = userInput.split(' ').join('%20');
-    var formatUserInput = "text=" + userInput + "&language=en-US";
-    return formatUserInput;
-}
-
 function tryAgain(){
 	grammarCorrections = [];
 	//speechtotext
 	//formatString(speachtoText)
 	//grammarcorretipn() returns errors
 	//state.errors=
-}
-
-function grammarCorrections(userInput){
-    const data = formatString(userInput);
-    const grammarCorrections = [];
-    const xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === this.DONE) {
-            var json = JSON.parse(this.responseText);
-            console.log(this.responseText);
-            if(json.matches.length == 0){
-                console.log("Correct")
-            }else{
-                for(const match of json.matches){
-                    grammarCorrections.push(match.message);
-                }
-                console.log(grammarCorrections);
-				return grammarCorrections;
-			}
-        }
-
-    });
-
-    xhr.open("POST", "https://grammarbot.p.rapidapi.com/check");
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("x-rapidapi-host", "grammarbot.p.rapidapi.com");
-    xhr.setRequestHeader("x-rapidapi-key", "f8a5476c0dmsh0944856f713f44ep14a1dfjsn96d9d75c6d1b");
-
-    xhr.send(data);
 }
 
 function speakTheQuestion(question){
@@ -339,6 +308,8 @@ function onStart() {
 	// TODO: Get default language from browser
 	state = new State('en-US', 5);
 	elements = new PageElements();
+	// TODO: Fill with API Key
+	grammar = new GrammarBotClient("");
 }
 
 /** Execute initialization code */
