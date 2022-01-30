@@ -183,7 +183,7 @@ function updateTranscriptResult(newTranscript) {
 		if (newTranscript.length == 0) {
 			let listItem = document.createElement('li')
 			listItem.textContent = "Correct! :)"
-			transcriptResult.appendChild(listItem)
+			elements.transcriptResult.appendChild(listItem)
 		}
 	}
 }

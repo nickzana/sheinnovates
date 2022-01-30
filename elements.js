@@ -14,6 +14,7 @@ class PageElements {
 	transcriptContainer = document.getElementById("transcript-container");
 	// TODO: update id to match other ID styles
 	tryAgainButton = document.getElementById("tryAgainBtn");
+	transcriptResult = document.getElementById("transcript-result");
 
 	constructor() {
 		this.nextQuestionButton.addEventListener('click', () => {
