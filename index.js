@@ -21,7 +21,7 @@ class PageElements {
  * @property {string}	language		- The language the user speaks
  * @property {number}	difficulty		- The difficulty of question to present to the user
  * @property {string}	transcriptText	- A variable to store the text transcribed from the user's speech
- * @property {_errors} grammarCorrections - Array that stores the grammar errors
+ * @property {Object[]} corrections		- Array that stores the grammar errors
  */
 class State {
 	recording = false;
