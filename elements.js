@@ -35,6 +35,7 @@ class PageElements {
 				state.recording = true;
 			} else {
 				this.recordButton.textContent = "Record"
+				state.transcriber.stop();
 				state.recording = false;
 				this.transcriptContainer.style.display = 'block'
 				this.transcriptContainer.scrollIntoView()
