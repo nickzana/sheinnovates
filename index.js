@@ -80,7 +80,7 @@ class State {
 		this._transcriptText = value;
 		if (!this.isTranscribing) {
 			grammar.check(this._transcriptText, this.language, function(corrections) {
-				this.corrections = corrections;
+				state.corrections = corrections;
 			});
 		}
 	}
@@ -316,11 +316,11 @@ tryAgainBtn.addEventListener('click', () => {
  * Runs on launch of the site to do initial setup
  */
 function onStart() {
-	// TODO: Get default language from browser
-	state = new State('en-US', 5);
 	elements = new PageElements();
 	// TODO: Fill with API Key
 	grammar = new GrammarBotClient("");
+	// TODO: Get default language from browser
+	state = new State('en-US', 5);
 }
 
 /** Execute initialization code */
