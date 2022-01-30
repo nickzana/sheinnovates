@@ -56,13 +56,6 @@ class PageElements {
 
 		this.transcriptText.textContent = state.transcriptText;
 
-		if (state.corrections == null) {
-			this.transcriptResult.style.display = 'none';
-		} else {
-			this.transcriptResult.style.display = 'block';
-			this.updateTranscriptResult(state.corrections);
-		}
-
 		if (state.category == "none") {
 			this.questionContainer.style.display = 'none';
 		} else {
@@ -80,6 +73,8 @@ class PageElements {
 			if (state.corrections != null) {
 				this.transcriptContainer.style.display = "block";
 				this.transcriptContainer.scrollIntoView();
+			} else {
+				this.transcriptContainer.style.display = "none";
 			}
 		}
 	}
