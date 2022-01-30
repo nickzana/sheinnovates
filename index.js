@@ -133,7 +133,7 @@ class State {
 function speakTheQuestion(question){
 	var synthesis = window.speechSynthesis;
 	var utterance = new SpeechSynthesisUtterance(question);
-	if(SpeechSynthesisEvent == null)
+	if(SpeechSynthesisEvent != null)
 		synthesis.speak(utterance);
 }
 
