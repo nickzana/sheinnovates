@@ -353,7 +353,7 @@ Do you like to learn the language of the country you’re in or use English?`
 	}
 	else if(category == 48)
 	{
-		prev ==38;
+		prev = 38;
 	}
 
 	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
@@ -375,10 +375,16 @@ const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
 	transcriptText.textContent = newTranscript
 }
+function clearTranscriptText() {
+	transcriptText.textContent = ""
+}
 
 const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
 	transcriptResult.textContent = newTranscript
+}
+function clearTranscriptResult() {
+	transcriptResult.textContent = ""
 }
 
 const transcriptContainer = document.getElementById('transcript-container')
@@ -396,10 +402,12 @@ recordBtn.addEventListener('click', () => {
 	}
 })
 
-const tryAgainBtn = document.getElementById('tryAgainBtn')
 
+const tryAgainBtn = document.getElementById('tryAgainBtn')
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
+	clearTranscriptText()
+	clearTranscriptResult()
 })
 
 /**
