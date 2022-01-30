@@ -73,6 +73,7 @@ class PageElements {
 
 		if (state.isTranscribing) {
 			this.recordButton.textContent = "Stop Recording";
+			this.recordingContainer.style.display = "none";
 		} else {
 			this.recordButton.textContent = "Record";
 
