@@ -98,7 +98,10 @@ class State {
 	 * Sends transcript to grammar checker and updates errors
 	 */
 	checkTranscript(transcript) {
-		console.log(transcript);
+		console.log(transcript)
+		updateTranscriptText(transcript)
+		var corrections = grammarCorrections(transcript)
+		updateTranscriptResult(corrections)
 		// TODO: Send transcription text to grammar checker and update errors array
 	}
 
@@ -132,7 +135,6 @@ class State {
 		);
 	}
 }
-
 
 var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
@@ -399,19 +401,25 @@ const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
 	transcriptText.textContent = newTranscript
 }
+function clearTranscriptText() {
+	transcriptText.textContent = ""
+}
 
 const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
 	transcriptResult.textContent = newTranscript
+}
+function clearTranscriptResult() {
+	transcriptResult.textContent = ""
 }
 
 const transcriptContainer = document.getElementById('transcript-container')
 const recordBtn = document.getElementById('record')
 recordBtn.addEventListener('click', () => {
 	if (state.recording == false) {
+		state.transcriber.start();
 		recordBtn.textContent = "Stop Recording"
 		state.recording = true;
-		alert("recording")
 	} else {
 		recordBtn.textContent = "Record"
 		state.recording = false;
@@ -421,7 +429,6 @@ recordBtn.addEventListener('click', () => {
 })
 
 const tryAgainBtn = document.getElementById('tryAgainBtn')
-
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
 })
