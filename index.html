@@ -36,18 +36,30 @@
         </div>
 
         <div id="app-section">
-            <span id="cta">Pick a category to get a question: </span>
+			<div id="recording-container">
+                <div id="record-prompt">
+                    <span>Record Your Audio</span>
+                </div>
+                <ul>
+                    <li>Record yourself by clicking and holding the 'Record' button</li>
+                    <li>When you are done recording, release the record button</li>
+                    <li>To submit the recording, hit the 'Submit' button</li>
+                </ul>
+            </div>
+
+
             <div id="container">
                 <div id="categories-container">
                     <label id="category-label" for="categories">Select a Category</label>
                     <form id="categories">
                         <select id=period_dropdown placeholder="Choose a category">
-                            <option value="-1">Choose a category</option>
-                            <option value="12" >Family</option>
-                            <option value="25">Food</option>
-                            <option value="36">General</option>
-                            <option value="51">Hobbies</option>
-                            <option value="61">Holidays</option>
+                            <option value="none">Choose a category</option>
+                            <option value="family" >Family</option>
+                            <option value="food">Food</option>
+                            <option value="general">General</option>
+                            <option value="hobbies">Hobbies</option>
+                            <option value="holidays">Holidays</option>
+							<option value="all">All Questions</option>
                         </select>
                     </form>
                 </div>
@@ -59,23 +71,6 @@
                     </div>
 
                 </div>
-            </div>
-            <div id="recording-container">
-                <div id="record-prompt">
-                    <span>Record Your Audio</span>
-                </div>
-                <ul>
-                    <li>Record yourself by clicking and holding the 'Record' button</li>
-                    <li>When you are done recording, release the record button</li>
-                    <li>To submit the recording, hit the 'Submit' button</li>
-                </ul>
-            </div>
-            <div id="recording-controls">
-                <button id="text-to-speech" type="button">Hear Question</button>
-                <button id="record" type="button">Record</button>
-                <button id="change-question-button" type="button">Next Question</button>
-                <button id="submit" type="submit">Submit</button>
-
             </div>
 
             <div id="transcript-container">
@@ -91,9 +86,16 @@
                     <li>If you want to try recording again, click the 'Try Again' button</li>
                 </ul>
                 <div id="transcript-controls">
-                    <button id="try-again-btn" type="button">Try Again</button>
                 </div>
             </div>
+
+			<div id="recording-controls">
+                <button id="text-to-speech" type="button">Hear Question</button>
+                <button id="record" type="button">Record</button>
+                <button id="change-question-button" type="button">Next Question</button>
+                <button id="submit" type="submit">Submit</button>
+            </div>
+
         </div>
 
     </div>

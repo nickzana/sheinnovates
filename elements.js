@@ -9,47 +9,29 @@ class PageElements {
 	transcriptText = document.getElementById("transcript-text");
 	nextQuestionButton = document.getElementById("change-question-button");
 	corrections = document.getElementById("transcript-result");
-	periodDropdown = document.getElementById("period_dropdown");
 	categories = document.getElementById("categories");
 	transcriptContainer = document.getElementById("transcript-container");
-	tryAgainButton = document.getElementById("try-again-btn");
 	transcriptResult = document.getElementById("transcript-result");
 	textToSpeech = document.getElementById("text-to-speech");
+	recordingContainer = document.getElementById("recording-container");
 
 	constructor() {
 		this.nextQuestionButton.addEventListener('click', () => {
-			state.question = randomQuestion(this.periodDropdown.value);
+			state.question = randomQuestion(state.category);
 		})
 
-		this.categories.addEventListener('click', () => {
-			if (this.periodDropdown.value != -1) {
-				this.questionContainer.style.display = 'flex'
-				state.question = randomQuestion(this.periodDropdown.value);
-			}
-			if (this.periodDropdown.value == -1) this.questionContainer.style.display = 'none'
+		this.categories.addEventListener('change', (e) => {
+			state.category = e.target.value;
 		})
 
 		this.textToSpeech.addEventListener('click', () =>{
-			state.textToSpeech = speakTheQuestion(this.questionText.textContent);
+			speakTheQuestion(this.questionText.textContent);
 		})
 
-		this.recordButton.addEventListener('click', () => {
-			if (state.isTranscribing == false) {
-				state.transcriber.start();
-				this.recordButton.textContent = "Stop Recording"
-				state.isTranscribing = true;
-			} else {
-				this.recordButton.textContent = "Record"
-				state.transcriber.stop();
-				state.isTranscribing = false;
-				this.transcriptContainer.style.display = 'block'
-				this.transcriptContainer.scrollIntoView()
-			}
-		})
-
-		this.tryAgainButton.addEventListener('click', () => {
-			this.transcriptContainer.style.display = 'none'
-		})
+		this.recordButton.onclick = function() {
+			console.log("Pressed record");
+			state.isTranscribing = !state.isTranscribing;
+		};
 	}
 
 	updateTranscriptResult(newTranscript) {
@@ -76,5 +58,25 @@ class PageElements {
 		this.transcriptText.textContent = state.transcriptText;
 
 		this.updateTranscriptResult(state.corrections);
+
+		if (state.category == "none") {
+			this.questionContainer.style.display = 'none';
+		} else {
+			this.questionContainer.style.display = 'flex';
+			this.recordButton.scrollIntoView();
+		}
+
+		if (state.isTranscribing) {
+			this.recordingContainer.style.display = 'none';
+			this.recordButton.textContent = "Stop Recording";
+			this.transcriptContainer.style.display = "none";
+		} else {
+			this.recordButton.textContent = "Record";
+
+			if (state.corrections != null) {
+				this.transcriptContainer.style.display = "block";
+				this.transcriptContainer.scrollIntoView();
+			}
+		}
 	}
 }
