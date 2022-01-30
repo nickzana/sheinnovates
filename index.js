@@ -98,10 +98,10 @@ class State {
 	 * Sends transcript to grammar checker and updates errors
 	 */
 	checkTranscript(transcript) {
-		console.log(transcript);
-		updateTranscriptText(transcript);
-		var corrections = grammarCorrections(transcript);
-		updateTranscriptResult(corrections);
+		console.log(transcript)
+		updateTranscriptText(transcript)
+		var corrections = grammarCorrections(transcript)
+		updateTranscriptResult(corrections)
 		// TODO: Send transcription text to grammar checker and update errors array
 	}
 
@@ -135,7 +135,6 @@ class State {
 		);
 	}
 }
-
 
 var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
@@ -359,7 +358,7 @@ Do you like to learn the language of the country you’re in or use English?`
 	}
 	else if(category == 48)
 	{
-		prev ==38;
+		prev = 38;
 	}
 
 	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
@@ -393,20 +392,25 @@ const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
 	transcriptText.textContent = newTranscript
 }
+function clearTranscriptText() {
+	transcriptText.textContent = ""
+}
 
 const transcriptResult = document.getElementById('transcript-result')
 function updateTranscriptResult(newTranscript) {
 	transcriptResult.textContent = newTranscript
+}
+function clearTranscriptResult() {
+	transcriptResult.textContent = ""
 }
 
 const transcriptContainer = document.getElementById('transcript-container')
 const recordBtn = document.getElementById('record')
 recordBtn.addEventListener('click', () => {
 	if (state.recording == false) {
-		startT()
+		state.transcriber.start();
 		recordBtn.textContent = "Stop Recording"
 		state.recording = true;
-		
 	} else {
 		state.transcriber.stop()
 		recordBtn.textContent = "Record"
@@ -417,20 +421,7 @@ recordBtn.addEventListener('click', () => {
 	}
 })
 
-function startT() {
-	state.transcriber.start()
-}
-
-function stopT() {
-	state.transcriber.stop()
-}
-
-function checkTranscriptT() {
-	state.checkTranscript()
-}
-
 const tryAgainBtn = document.getElementById('tryAgainBtn')
-
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
 })
