@@ -193,12 +193,6 @@ function speakTheQuestion(question){
  * @param {number} difficulty - difficulty of the question between 1 and 10
  * @returns {string}
  */
-/**
- * Return a question to ask the user
- * @param {string} language - language of the question to return
- * @param {number} difficulty - difficulty of the question between 1 and 10
- * @returns {string}
- */
 function randomQuestion(category) {
 	const ques =
 `How many people are in your family?
