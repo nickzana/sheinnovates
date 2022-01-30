@@ -15,7 +15,9 @@
     <header>
         <div id="nav-container">
             <nav>
-                <a href="index.html"><span>GrammarQuery</span></a>
+            <a href="index.html">
+                <img src="logo.JPG" url ="index.html" height="80px"/>
+            </a>
                 <ul>
                     <a href="index.html"><li>Home</li></a>
                     <a href="about.html"><li>About</li></a>
@@ -27,6 +29,7 @@
     <div id="main">
         <div id="welcome-section">
             <h1>GrammarQuery</h1>
+            <img src="img.png"   width="270px"/>
             <p>GrammarQuery is a tool to help improve your English speaking skills.
                 Simply record yourself and GrammarQuery will catch any grammatical errors</p>
             <button id="startBtn" type="button" onClick="document.getElementById('app-section').scrollIntoView();">Click to Start</button>
@@ -58,7 +61,7 @@
                 <div id="record-prompt">
                     <span>Record Your Audio</span>
                 </div>
-                <ul id="record-list">
+                <ul>
                     <li>Record yourself by clicking and holding the 'Record' button</li>
                     <li>When you are done recording, release the record button</li>
                     <li>To submit the recording, hit the 'Submit' button</li>
@@ -80,11 +83,9 @@
                 <hr>
                 <ul>
                     <li>If you want to try recording again, click the 'Try Again' button</li>
-                    <li>Otherwise, press the 'Review' button to review your grammar!</li>
                 </ul>
                 <div id="transcript-controls">
-                    <button id="tryAgainBtn" type="button">Try Again</button>
-                    <button id="reviewBtn" type="button">Review</button>
+                    <button id="try-again-btn" type="button">Try Again</button>
                 </div>
             </div>
         </div>

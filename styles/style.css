@@ -8,12 +8,15 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
+
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Nav styles */
 #nav-container {
     background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%, 1) 100%);
 }
+
 
 nav {
     display: flex;
@@ -33,7 +36,7 @@ nav ul {
     padding: 0;
     display: flex;
     gap: 2em;
-    font-size: 18px;
+    font-size: 24px;
 
 }
 
@@ -67,6 +70,22 @@ nav a {
     justify-content: center;
 }
 
+@media screen and (max-width: 700px) {
+    #welcome-section h1 {
+        font-size: 36px;
+    }
+}
+#welcome-section img {
+
+    margin-left: 130px;
+}
+
+@media screen and (max-width: 700px) {
+    #welcome-section h1 {
+        font-size: 36px;
+    }
+}
+
 #welcome-section p {
     font-size: 30px;
     line-height: 1.6;
@@ -76,7 +95,7 @@ nav a {
 
 #startBtn {
     border: none;
-    
+
 background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%, 1) 100%);
     color: #f0f8ff;
     padding: 1.5em;
@@ -152,7 +171,7 @@ background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%,
     flex-direction: column;
     align-items: flex-start;
     gap: 1em;
-    
+
     padding: 2em 1em 2em 1em;
 }
 
@@ -175,6 +194,7 @@ background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%,
 
 /* Recording styles */
 #recording-container {
+    text-align: center;
     margin-top: 1em;
     background-color: #deefe2;
     padding-bottom: 1em;
@@ -316,7 +336,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#D24532", en
 }
 .LearnMoreBtn {
     border: none;
-    
+
 background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%, 1) 100%);
     color: #f0f8ff;
     padding: 1em;
