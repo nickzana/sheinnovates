@@ -13,7 +13,6 @@ var grammar;
  * @property {boolean}  isTranscribing  - Whether the user is currently speaking
  */
 class State {
-	recording = false;
 	_question;
 
 	/**
@@ -67,21 +66,27 @@ class State {
 	 * @param {string} value			- the value to set the transcriptText to
 	 */
 	set transcriptText(value) {
-		// Eliminate common speech transcription mistake of first letter being lowercase
-		if(value != null
-			&& value.length > 0
-			&& value.charAt(0) != value.charAt(0).toUpperCase()) {
-			var firstLetter = value.charAt(0).toUpperCase();
-			value = value.replace(value.charAt(0), firstLetter);
-			this._transcriptText = value;
+		if (value == null) {
+			this.transcriptText = "";
 			return;
 		}
 
+		if (value.length == 0) {
+			value = "";
+		} else if(value.charAt(0) != value.charAt(0).toUpperCase()) {
+			// Eliminate common speech transcription mistake of first letter being lowercase
+			var firstLetter = value.charAt(0).toUpperCase();
+			value = value.replace(value.charAt(0), firstLetter);
+		}
+
+		this._transcriptText = value;
+
 		if (!this.isTranscribing) {
-			grammar.check(this._transcriptText, this.language, function(corrections) {
+			grammar.check(this.transcriptText, this.language, function(corrections) {
 				state.corrections = corrections;
 			});
 		}
+
 		this.updateGui();
 	}
 
@@ -100,7 +105,7 @@ class State {
 	}
 	_corrections;
 
-	set corrections(value){
+	set corrections(value) {
 		this._corrections = value;
 		this.updateGui();
 	}

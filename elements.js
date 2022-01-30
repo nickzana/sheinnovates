@@ -29,14 +29,14 @@ class PageElements {
 		})
 
 		this.recordButton.addEventListener('click', () => {
-			if (state.recording == false) {
+			if (state.isTranscribing == false) {
 				state.transcriber.start();
 				this.recordButton.textContent = "Stop Recording"
-				state.recording = true;
+				state.isTranscribing = true;
 			} else {
 				this.recordButton.textContent = "Record"
 				state.transcriber.stop();
-				state.recording = false;
+				state.isTranscribing = false;
 				this.transcriptContainer.style.display = 'block'
 				this.transcriptContainer.scrollIntoView()
 			}
