@@ -1,7 +1,6 @@
 var state;
 var elements;
 var grammar;
-
 /**
  * @typedef	 {Object}	State			- Class representing the state of the program
  * @property {string}	question		- The current question being displayed to the user.
@@ -66,6 +65,7 @@ class State {
 	 * @param {string} value			- the value to set the transcriptText to
 	 */
 	set transcriptText(value) {
+<<<<<<< HEAD
 		if (value == null) {
 			this.transcriptText = "";
 			return;
@@ -156,6 +156,51 @@ function speakTheQuestion(question){
 	synthesis.speak(utterance);
 }
 
+const question = document.getElementById('question')
+function updateQuestion(newQuestion) {
+	question.textContent = newQuestion
+}
+
+
+
+const updateQuestionBtn = document.getElementById('change-question-button')
+updateQuestionBtn.addEventListener('click', () => {
+	var x = document.getElementById("period_dropdown").value;
+	updateQuestion(randomQuestion(x))
+})
+
+
+const transcriptText = document.getElementById('transcript-text')
+function updateTranscriptText(newTranscript) {
+	transcriptText.textContent = newTranscript
+}
+
+const transcriptResult = document.getElementById('transcript-result')
+function updateTranscriptResult(newTranscript) {
+	transcriptResult.textContent = newTranscript
+}
+
+const transcriptContainer = document.getElementById('transcript-container')
+const recordBtn = document.getElementById('record')
+recordBtn.addEventListener('click', () => {
+	if (state.recording == false) {
+		recordBtn.textContent = "Stop Recording"
+		state.recording = true;
+		alert("recording")
+	} else {
+		recordBtn.textContent = "Record"
+		state.recording = false;
+		transcriptContainer.style.display = 'block'
+		transcriptContainer.scrollIntoView()
+	}
+})
+
+const tryAgainBtn = document.getElementById('tryAgainBtn')
+
+tryAgainBtn.addEventListener('click', () => {
+	transcriptContainer.style.display = 'none'
+})
+
 /**
  * Runs on launch of the site to do initial setup
  */
@@ -165,6 +210,7 @@ function onStart() {
 	grammar = new GrammarBotClient("");
 	// TODO: Get default language from browser
 	state = new State('en-US', 5);
+	elements = new PageElements();
 }
 
 /** Execute initialization code */
