@@ -62,7 +62,5 @@ class GrammarBotClient {
 		request.send();
 	}
 
-	constructor(apiKey) {
-		//this._apiKey = apiKey;
-	}
+	constructor() {}
 }
