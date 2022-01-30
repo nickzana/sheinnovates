@@ -220,8 +220,8 @@ function tryAgain(){
 	//state.errors=
 }
 
-function grammarCorrections(userInput){
-    const data = formatString(userInput);
+function grammarCorrections(){
+    const data = changeString("I goes too the stores");
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -229,7 +229,7 @@ function grammarCorrections(userInput){
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             var json = JSON.parse(this.responseText);
-            //console.log(this.responseText);
+            console.log(this.responseText);
             if(json.matches.length == 0){
                 console.log("Correct")
             }else{
@@ -292,20 +292,9 @@ function speakTheQuestion(question){
  * @param {number} difficulty - difficulty of the question between 1 and 10
  * @returns {string}
  */
-function randomQuestion(language, difficulty, category) {
+function randomQuestion(category) {
 	const ques =
-`What is your name?
-Where do you live?
-Where are you from?
-Where were you born?
-What do you do?
-What do you study?
-Describe yourself in three words.
-Tell me about yourself.
-Who is your favourite person in the world and why?
-What do you want to do when you’re older?
-What type of house do you live in?
-How many people are in your family?
+`How many people are in your family?
 Do you have any brothers or sisters?
 What does your dad do?
 What does your mum do?
@@ -317,6 +306,30 @@ Do you want any children?
 Do you have any children?
 Describe your house.
 Describe your city or town.
+What is your favourite type of food?
+What is your favourite type of drink?
+Do you like to cook?
+Do you think you’re a good cook?
+what was the last meal you cooked?
+Do you think you’re a healthy person?
+Are you a vegetarian?
+Do you drink alcohol?
+Do you prefer tea or coffee?
+Which country has the best food?
+Do you prefer pasta or rice?
+Do you like spicy food?
+Who cooks in your house?
+What is your name?
+Where do you live?
+Where are you from?
+Where were you born?
+What do you do?
+What do you study?
+Describe yourself in three words.
+Tell me about yourself.
+Who is your favourite person in the world and why?
+What do you want to do when you’re older?
+What type of house do you live in?
 What do you like to do in your free time?
 What sport do you do?
 Do you prefer winter sports or summer sports?
@@ -344,49 +357,45 @@ Do you prefer to stay in a hotel or an air bnb?
 Do you like to learn the language of the country you’re in or use English?`
 	var questions = ques.split('\n');
 	var prev = 0;
-	if(category == 11)
+	if(category == 12)
 	{
-		prev = 0;
+		prev = 1;
 	}
-	else if(category == 23)
+	else if(category == 25)
 	{
-		prev = 11;
+		prev = 13;
 	}
-	else if(category == 38)
+	else if(category == 36)
 	{
-		prev = 23;
+		prev = 26;
 	}
-	else if(category == 48)
+	else if(category == 51)
 	{
-		prev = 38;
+		prev =37;
 	}
-
-	var ans =  questions[Math.floor(Math.random(category - prev) * questions.length) + prev];
+	else if(category == 61)
+	{
+		prev = 52;
+	}
+	var number = Math.floor(Math.random() * (category - prev)) + prev;
+	
+	var ans =  questions[number];
+	return ans;
 }
-
-/**
- * Runs on launch of the site to do initial setup
- */
-function onStart() {
-	// TODO: Get default language from browser
-	state = new State('en-US', 5);
-	elements = new PageElements();
-}
-
-/** Execute initialization code */
-onStart();
 
 const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
 	question.textContent = newQuestion
 }
 
+
+
 const updateQuestionBtn = document.getElementById('change-question-button')
 updateQuestionBtn.addEventListener('click', () => {
-	updateQuestion(questions[Math.floor(Math.random()*questions.length)])
+	var x = document.getElementById("period_dropdown").value;
+	updateQuestion(randomQuestion(x))
 })
 
-questions = ['question#1', 'question#2', 'question#3']
 
 const transcriptText = document.getElementById('transcript-text')
 function updateTranscriptText(newTranscript) {
@@ -412,12 +421,10 @@ recordBtn.addEventListener('click', () => {
 		recordBtn.textContent = "Stop Recording"
 		state.recording = true;
 	} else {
-		state.transcriber.stop()
 		recordBtn.textContent = "Record"
-		stopT()
+		state.recording = false;
 		transcriptContainer.style.display = 'block'
 		transcriptContainer.scrollIntoView()
-		checkTranscriptT()
 	}
 })
 
@@ -425,3 +432,15 @@ const tryAgainBtn = document.getElementById('tryAgainBtn')
 tryAgainBtn.addEventListener('click', () => {
 	transcriptContainer.style.display = 'none'
 })
+
+/**
+ * Runs on launch of the site to do initial setup
+ */
+function onStart() {
+	// TODO: Get default language from browser
+	state = new State('en-US', 5);
+	elements = new PageElements();
+}
+
+/** Execute initialization code */
+onStart();
