@@ -17,7 +17,6 @@ body {
     background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%, 1) 100%);
 }
 
-
 nav {
     display: flex;
     align-items: center;
@@ -70,14 +69,19 @@ nav a {
     justify-content: center;
 }
 
+#welcome-section img {
+    margin-left: auto;
+    margin-right: auto;
+}
+#logoIMG {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 @media screen and (max-width: 700px) {
     #welcome-section h1 {
         font-size: 36px;
     }
-}
-#welcome-section img {
-
-    margin-left: 130px;
 }
 
 @media screen and (max-width: 700px) {
@@ -155,6 +159,7 @@ background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%,
     padding: 1em;
     margin-left: auto;
     margin-right: auto;
+    font-size: 18px;
 }
 
 #question-container {
@@ -214,7 +219,8 @@ background: linear-gradient(0deg, hsla(147, 64%, 51%, 1) 0%, hsla(147, 64%, 71%,
 }
 
 #record-list {
-    font-size: 18px;
+    font-size: 24px;
+    text-align: center;
 }
 
 #recording-controls {
