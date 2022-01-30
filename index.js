@@ -150,8 +150,8 @@ function tryAgain(){
 	//state.errors=
 }
 
-function grammarCorrections(){
-    const data = changeString("I goes too the stores");
+function grammarCorrections(userInput){
+    const data = formatString(userInput);
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -294,8 +294,6 @@ const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
 	question.textContent = newQuestion
 }
-
-
 
 const updateQuestionBtn = document.getElementById('change-question-button')
 updateQuestionBtn.addEventListener('click', () => {
