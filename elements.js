@@ -67,6 +67,10 @@ class PageElements {
 			this.transcriptContainer.style.display = "none";
 		}
 
+		if (state.corrections != null) {
+			this.updateTranscriptResult(state.corrections);
+		}
+
 		if (state.isTranscribing) {
 			this.recordButton.textContent = "Stop Recording";
 		} else {
