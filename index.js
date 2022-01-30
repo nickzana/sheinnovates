@@ -220,8 +220,8 @@ function tryAgain(){
 	//state.errors=
 }
 
-function grammarCorrections(){
-    const data = changeString("I goes too the stores");
+function grammarCorrections(userInput){
+    const data = formatString(userInput);
     const grammarCorrections = [];
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -249,29 +249,6 @@ function grammarCorrections(){
     xhr.setRequestHeader("x-rapidapi-key", "f8a5476c0dmsh0944856f713f44ep14a1dfjsn96d9d75c6d1b");
 
     xhr.send(data);
-}
-function getUserInput(){
-    var transcript = "";
-    if("webkitSpeechRecognition" in window){
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
- //stop on mouse up
-    document.onmousedown = function(){
-        recognition.onstart = function(){
-            console.log("Recording started");
-        };
-    }
-    document.onmouseup = function(){
-        recognition.onres
-    }
-
-
-
-    }else{
-        console.log("Not supported by Browser")
-    }
-
 }
 
 function speakTheQuestion(question){
@@ -387,8 +364,6 @@ const question = document.getElementById('question')
 function updateQuestion(newQuestion) {
 	question.textContent = newQuestion
 }
-
-
 
 const updateQuestionBtn = document.getElementById('change-question-button')
 updateQuestionBtn.addEventListener('click', () => {
