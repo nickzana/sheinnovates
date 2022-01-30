@@ -51,6 +51,7 @@ class State {
 		if (!this.isTranscribing) {
 			grammar.check(this.transcriptText, 'en-US', function(corrections) {
 				state.corrections = corrections;
+				state.updateGui();
 			});
 		}
 
