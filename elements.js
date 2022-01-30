@@ -25,27 +25,25 @@ class PageElements {
 		})
 
 		this.textToSpeech.onclick = function() {
-			console.log("Pressed texttospeech");
 			speakTheQuestion(state.question);
 		};
 
 		this.recordButton.onclick = function() {
-			console.log("Pressed record");
 			state.isTranscribing = !state.isTranscribing;
 		};
 	}
 
-	updateTranscriptResult(newTranscript) {
-		if (newTranscript != undefined) {
+	updateTranscriptResult(corrections) {
+		if (corrections != undefined) {
 			while (elements.corrections.firstChild) {
 				elements.corrections.removeChild(elements.corrections.firstChild);
 			}
-			for (let i = 0; i < newTranscript.length; i++) {
+			for (let i = 0; i < corrections.length; i++) {
 				let listItem = document.createElement('li')
-				listItem.textContent = newTranscript[i]
+				listItem.textContent = corrections[i]
 				elements.corrections.appendChild(listItem)
 			}
-			if (newTranscript.length == 0) {
+			if (corrections.length == 0) {
 				let listItem = document.createElement('li')
 				listItem.textContent = "Correct! :)"
 				elements.transcriptResult.appendChild(listItem)
@@ -58,7 +56,12 @@ class PageElements {
 
 		this.transcriptText.textContent = state.transcriptText;
 
-		this.updateTranscriptResult(state.corrections);
+		if (state.corrections == null) {
+			this.transcriptResult.style.display = 'none';
+		} else {
+			this.transcriptResult.style.display = 'block';
+			this.updateTranscriptResult(state.corrections);
+		}
 
 		if (state.category == "none") {
 			this.questionContainer.style.display = 'none';

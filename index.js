@@ -19,6 +19,7 @@ class State {
 	set question(value) {
 		//boolean if they want it to talk
 		this._question = value;
+		this.corrections = null;
 		this.updateGui();
 	}
 
