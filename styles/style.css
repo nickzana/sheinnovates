@@ -8,12 +8,15 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
+    
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Nav styles */
 #nav-container {
     background-color: #5cdb95;
 }
+
 
 nav {
     display: flex;
@@ -32,8 +35,8 @@ nav ul {
     padding: 0;
     display: flex;
     gap: 2em;
-    font-size: 18px;
-
+    font-size: 24px;
+    
 }
 
 nav a {
@@ -41,20 +44,45 @@ nav a {
     text-decoration: none;
 }
 
+@media screen and (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 1em;
+    }
+}
+
 /* Welcome section styles */
 #welcome-section {
-    text-align: center;
-    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 35%;
+    min-width: 300px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #welcome-section h1 {
     font-size: 64px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+    #welcome-section h1 {
+        font-size: 36px;
+    }
+}
+#welcome-section img {
+    
+    margin-left: 130px;
 }
 #welcome-section p {
     font-size: 30px;
     line-height: 1.6;
+    min-width: 300px;
+    text-align: center;
 }
 
 #startBtn {
@@ -65,19 +93,26 @@ nav a {
     border-radius: 4px;
     margin-bottom: 10em;
     font-size: 24px;
+    max-width: 25%;
+    min-width: 10em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Transcript section styles */
-#transcript-section {
-    text-align: center;
+/* App section styles */
+#app-section {
     max-width: 45%;
+    min-width: 20em;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* Question styles */
 #cta {
+    display: flex;
+    justify-content: center;
     font-size: 30px;
+
 }
 
 #question-container {
@@ -98,7 +133,7 @@ nav a {
     font-size: 24px;
 }
 
-#changeQuestionBtn {
+#change-question-button {
     border: none;
     background-color: #5cdb95;
     padding: 0.5em;
@@ -107,9 +142,11 @@ nav a {
 
 /* Recording styles */
 #recording-container {
+    text-align: center;
     margin-top: 1em;
     background-color: #deefe2;
     padding-bottom: 1em;
+    box-shadow: 0px 0px 15px 0px #333;
 }
 
 #record-prompt {
@@ -118,23 +155,58 @@ nav a {
     font-size: 24px;
 }
 
-#record {
+#recording-controls {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    gap: 0em 2em;
+    font-size: 18px;
+}
+
+#record, #tryAgainBtn {
     border: none;
     background-color: red;
     padding: 1em;
-    border-radius: 8px;
-    color: white;
-}
-
-#submit {
-    border: none;
-    background-color: gray;
-    padding: 1em;
-    border-radius: 8px;
+    border-radius: 4px;
     color: #deefe2;
 }
 
-/* About Styles */
+#submit, #reviewBtn {
+    border: none;
+    background-color: gray;
+    padding: 1em;
+    border-radius: 4px;
+    color: #deefe2;
+    display: none;
+}
+
+/* Transcript styles */
+#transcript-container {
+    background-color: #5cdb95;
+    padding: 1em;
+    margin-top: 1em;
+    display: none;
+}
+
+.transcript-title {
+    font-size: 30px;
+}
+
+#transcript-text {
+    font-size: 24px;
+}
+
+#transcript-result {
+    font-size: 24px;
+}
+
+#transcript-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0em 2em;
+}
+
+/* About styles */
 #about {
     max-width: 45%;
     margin-left: auto;
