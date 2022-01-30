@@ -76,6 +76,7 @@ class State {
 	 * @param {string} value			- the value to set the transcriptText to
 	 */
 	set transcriptText(value) {
+		updateTranscriptText(value);
 		this._transcriptText = value;
 		if (!this.isTranscribing) {
 			grammar.check(this._transcriptText, this.language, function(corrections) {
@@ -96,6 +97,16 @@ class State {
 
 	get isTranscribing() {
 		return this._isTranscribing;
+	}
+	_corrections;
+
+	set corrections(value){
+		updateTranscriptResult(value);
+		this._corrections = value;
+	}
+
+	get corrections(){
+		return this._corrections;
 	}
 
 	transcriber;
