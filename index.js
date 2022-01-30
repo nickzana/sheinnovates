@@ -76,6 +76,11 @@ class State {
 	 * @param {string} value			- the value to set the transcriptText to
 	 */
 	set transcriptText(value) {
+		if(value != null){
+			var firstLetter = value.charAt(0).toUpperCase();
+			console.log(firstLetter);
+			value = value.replace(value.charAt(0), firstLetter);
+		}
 		updateTranscriptText(value);
 		this._transcriptText = value;
 		if (!this.isTranscribing) {
