@@ -12,8 +12,7 @@ class PageElements {
 	periodDropdown = document.getElementById("period_dropdown");
 	categories = document.getElementById("categories");
 	transcriptContainer = document.getElementById("transcript-container");
-	// TODO: update id to match other ID styles
-	tryAgainButton = document.getElementById("tryAgainBtn");
+	tryAgainButton = document.getElementById("try-again-btn");
 	transcriptResult = document.getElementById("transcript-result");
 
 	constructor() {
