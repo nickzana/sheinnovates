@@ -63,11 +63,6 @@ class PageElements {
 			this.recordButton.scrollIntoView();
 		}
 
-		if (state.isTranscribing || state.corrections == null) {
-			this.transcriptContainer.style.display = "none";
-		}
-
-
 		if (state.isTranscribing) {
 			this.recordingContainer.style.display = 'none';
 			this.recordButton.textContent = "Stop Recording";
