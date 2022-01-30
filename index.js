@@ -1,7 +1,6 @@
 var state;
 var elements;
 var grammar;
-
 /**
  * @typedef	 {Object}	State			- Class representing the state of the program
  * @property {string}	question		- The current question being displayed to the user.
@@ -169,6 +168,7 @@ function onStart() {
 	grammar = new GrammarBotClient("");
 	// TODO: Get default language from browser
 	state = new State('en-US', 5);
+	elements = new PageElements();
 }
 
 /** Execute initialization code */
