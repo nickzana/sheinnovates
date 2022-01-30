@@ -332,6 +332,11 @@ function updateTranscriptResult(newTranscript) {
 			console.log(newTranscript[i])
 			transcriptResult.appendChild(listItem)
 		}
+		if (newTranscript.length == 0) {
+			let listItem = document.createElement('li')
+			listItem.textContent = "Correct! :)"
+			transcriptResult.appendChild(listItem)
+		}
 	}
 }
 function clearTranscriptResult() {
