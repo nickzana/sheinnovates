@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GrammarQuery</title>
     <link rel="stylesheet" href="styles/style.css">
+	<script src="./transcriber.js"></script>
 </head>
 <body>
     <header>
         <div id="nav-container">
             <nav>
-                <a href="index.html"><span>SheInnovates</span></a>
+            <a href="index.html">
+                <img src="logo.JPG" url ="index.html" height="80px"/>
+            </a>
+            
                 <ul>
                     <a href="index.html"><li>Home</li></a>
                     <a href="about.html"><li>About</li></a>
@@ -22,9 +26,10 @@
     </header>
     <div id="main">
         <div id="welcome-section">
-            <h1>SheInnovates</h1>
-            <p>SheInnovates is a tool to help improve your English speaking skills.
-                Simply record yourself and SheInnovates will catch any grammatical errors</p>
+            <h1>GrammarQuery</h1>
+            <img src="img.png"   width="270px"/>
+            <p>GrammarQuery is a tool to help improve your English speaking skills.
+                Simply record yourself and GrammarQuery will catch any grammatical errors</p>
             <button id="startBtn" type="button" onClick="document.getElementById('app-section').scrollIntoView();">Click to Start</button>
         </div>
 
@@ -34,7 +39,7 @@
             <form id = "perioddropdown" action="all.php" method="POST">
                 <div align="left">
                 <select id=period_dropdown>
-                <option value="12" >Family</option>
+                <option value="12" >Family</option>            
                 <option value="25">Food</option>
                 <option value="36">General</option>
                 <option value="51">Hobbies</option>
@@ -42,13 +47,9 @@
                 </select>
             </div>
             <div id="question-container">
-                
                 <span id="question-title">Question:</span>
-                
-                
-
                 <span id="question">What's your favorite animal?</span>
-                <button id="change-question-button" type="button">Change Question</button>
+                <button id="change-question-button" type="button">Next Question</button>
             </div>
             <div id="recording-container">
                 <div id="record-prompt">
@@ -66,10 +67,12 @@
             </div>
 
             <div id="transcript-container">
-                <span class="transcript-title">Here's what we heard: </span><br>
-                <span id="transcript-text">I like dog</span><br>
-                <span class="transcript-title">Here's what we found: </span><br>
-                <span id="transcript-result"><span>
+                <div id="transcript-text-container">
+                    <span class="transcript-title">Here's what we heard: </span><br>
+                    <span id="transcript-text">I like dog</span><br>
+                    <span class="transcript-title">Here's what we found: </span><br>
+                    <span id="transcript-result">test<span>
+                </div>
                 <hr>
                 <ul>
                     <li>If you want to try recording again, click the 'Try Again' button</li>
