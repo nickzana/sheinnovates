@@ -72,6 +72,11 @@ nav a {
     }
 }
 
+#welcome-section img {
+    
+    margin-left: 130px;
+}
+
 #welcome-section p {
     font-size: 30px;
     line-height: 1.6;
