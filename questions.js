@@ -69,27 +69,27 @@ Do you prefer to stay in a hotel or an air bnb?
 Do you like to learn the language of the country you’re in or use English?`
 	var questions = ques.split('\n');
 	var prev = 0;
-	if(category == 12)
+	if(category == 12)                 // 12 Family quuestions
 	{
 		prev = 1;
 	}
-	else if(category == 25)
+	else if(category == 25)            // 13 Food questions     12 + 13 = 25
 	{
 		prev = 13;
 	}
-	else if(category == 36)
+	else if(category == 36)           // 11 General questions    25 + 11 = 36
 	{
 		prev = 26;
 	}
-	else if(category == 51)
+	else if(category == 51)           // 15 Hobbies questions
 	{
 		prev =37;
 	}
-	else if(category == 61)
+	else if(category == 61) 		  // 10 Holiday questions   
 	{
 		prev = 52;
 	}
-	var number = Math.floor(Math.random() * (category - prev)) + prev;
+	var number = Math.floor(Math.random() * (category - prev)) + prev;    // generate random number based on the category
 
 	var ans =  questions[number];
 	return ans;
