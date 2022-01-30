@@ -14,6 +14,7 @@ class PageElements {
 	transcriptContainer = document.getElementById("transcript-container");
 	tryAgainButton = document.getElementById("try-again-btn");
 	transcriptResult = document.getElementById("transcript-result");
+	textToSpeech = document.getElementById("text-to-speech");
 
 	constructor() {
 		this.nextQuestionButton.addEventListener('click', () => {
@@ -26,6 +27,10 @@ class PageElements {
 				state.question = randomQuestion(this.periodDropdown.value);
 			}
 			if (this.periodDropdown.value == -1) this.questionContainer.style.display = 'none'
+		})
+
+		this.textToSpeech.addEventListener('click', () =>{
+			state.textToSpeech = speakTheQuestion(this.questionText.textContent);
 		})
 
 		this.recordButton.addEventListener('click', () => {
